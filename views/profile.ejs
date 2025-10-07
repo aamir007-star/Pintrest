@@ -1,13 +1,27 @@
 <% include ./partials/header.ejs %>
 
-<div class="profile w-full h-screen bg-zinc-800 text-white flex justify-center flex-col ">
+<div class="profile w-full min-h-screen bg-zinc-800 text-white flex justify-center flex-col ">
 
-    <div class="profiledetailes flex flex-col items items-center mt-5">
-        <div class="w-25 h-25 bg-zinc-300 rounded-full"></div>
-        <h1 class="text-2xl capitalize ">aamer qureshi</h1>
-        <h3 class="text-xs -mt-1">@email.com</h3>
-        <a class="px-3 rounded-full bg-red-600 mt-1 font-bold" href="#">edit</a>
-        <button class="px-2 rounded-full bg-zinc-700 text-sm mt-1 font-semibold">add new pin</button>
+    <form id="uploadform" hidden action="/fileupload" name="uploadform" method="post" enctype="multipart/form-data">
+  <input type="file" id="uploadfile" name="avatar" />
+</form>
+
+    <div class="profiledetailes flex flex-col items items-center">
+        <div class="relative">
+
+         <!-- profile picture -->
+        <div class="w-25 h-25 bg-zinc-300 rounded-full overflow-hidden">
+            <img class="w-full h-full object-cover" src="/images/uploads/<%=user.profileImage%>">
+        </div>
+        <!-- icon image -->
+             <span id="uploadicon" class="w-6 h-6 bg-zinc-200 rounded-full absolute bottom-1 right-[2px] flex justify-center items-center">
+             <i class="text-zinc-800 ri-pencil-fill"></i>
+            </span>
+        </div>
+
+        <h1 class="text-2xl capitalize "><%= user.username %></h1>
+        <h3 class="text-xs -mt-1"><%= user.email %></h3>
+        <a class="px-3 rounded-full bg-red-600 mt-1 font-bold" href="/add">add new post</a>
     </div>
 
     <!------------ card section ---------->
@@ -15,15 +29,15 @@
     <div class="cards mt-3 flex flex-wrap w-full h-full p-5 gap-3">
 
     <div>
-        <div class="card w-52 h-38 bg-zinc-300 rounded-md"></div>
-        <h3 class="text-xl">all pins</h3>
-    </div>
-
-    <div>
-        <div class="card w-52 h-38 bg-zinc-300 rounded-md"></div>
+        <div class="card max-w-52 max-h-38 bg-zinc-300 rounded-md overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://cdn.bhdw.net/im/bioluminescent-mushroom-at-night-wallpaper-128000_w635.webp" alt="">
+        </div>
+        <h3 class="text-xs mt-[2px] tracking-tight">all pins</h3>
     </div>
 
 </div>
 </div>
+
+<script src="/javascripts/profile.js"></script>
 
 <% include ./partials/footer.ejs %>

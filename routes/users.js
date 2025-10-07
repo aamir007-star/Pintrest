@@ -8,7 +8,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/pin');
 const userSchema = new mongoose.Schema({
     username: String,
     email: String,
-    passport: String
+    passport: String,
+    profileImage: String,
+    posts: [
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    }
+    ]
 });
 
 userSchema.plugin(plm);

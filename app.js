@@ -16,6 +16,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+app.use(flash())
 app.use(session({
  resave: false,
  saveUninitialized: false,
