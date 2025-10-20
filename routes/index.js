@@ -12,6 +12,15 @@ router.get('/', function(req, res, next) {
   res.render('index', {error: req.flash('error'), nav: false});
 });
 
+
+// show image route
+router.get('/show/:id', async (req, res) => {
+  const post = await postModel.findById(req.params.id);
+  if (!post) return res.status(404).send('Not found');
+  res.render('show', { post, nav: false });
+});
+
+
 // DELETE route for posts
 router.get('/delete/:id', isLoggedIn, async function (req, res) {
   try {
@@ -62,9 +71,13 @@ router.post('/register', function(req, res){
   userModel.register(userdata, req.body.password)
   .then(function(registereduser){
     passport.authenticate('local')(req, res, function(){
-      res.redirect('/profile')
+      res.redirect('/profile');
     })
   })
+    .catch(function(err){
+      req.flash('error', err.message); // manually set flash message
+      res.redirect('/register');
+    });
 })
 
 
@@ -97,7 +110,7 @@ res.redirect('/profile');
 })
 
 router.get('/register', function(req, res) {
-  res.render('register', {nav: false})
+  res.render('register', {nav: false, error: req.flash('error')})
 });
 
 router.get('/logout', function(req, res, next){

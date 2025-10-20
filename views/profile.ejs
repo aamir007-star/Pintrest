@@ -27,9 +27,10 @@
 
     <!------------ card section ---------->
 
-    <div class="cards mt-3 flex flex-wrap w-full h-full p-5 gap-3">
+    <div class="cards mt-3 flex flex-wrap w-full h-full p-5 gap-3 sm:flex-row flex-col">
 
         <% user.posts.forEach(function(elem){ %>
+             <a href="/show/<%= elem._id %>">
             <div>
                 <div class="card max-w-[208px] w-full h-48 bg-zinc-300 rounded-md overflow-hidden flex items-center justify-center">
                     <img class="w-full h-full object-cover object-center" src="/images/uploads/<%= elem.image %>" alt="<%= elem.title %>">
@@ -37,6 +38,7 @@
                     <h3 class="text-xs mt-1 tracking-tight truncate"><%= elem.title %></h3>
                 <a href="/delete/<%= elem._id %>" class="block w-8 text-center text-[12px] px-1 -mt-[1px] rounded-md bg-red-600">Delete</a>
             </div>
+            </a>
         <% }) %>
 
     </div>

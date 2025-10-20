@@ -1,17 +1,20 @@
 <% include ./partials/header.ejs %>
 
- <div class="mt-12 px-6 py-6 flex flex-wrap gap-2 text-white">
+ <div class="mt-12 px-6 py-6 flex sm:flex-row flex-col flex-wrap gap-2 text-white ">
 
 <% posts.forEach(function(elem){ %>
+    <a href="/show/<%= elem._id %>">
 
     <div>
     <div class="card max-w-[208px] w-full h-48 bg-zinc-300 rounded-md overflow-hidden flex items-center justify-center">
         <img class="w-full h-full object-cover object-center" src="/images/uploads/<%= elem.image %>" alt="<%= elem.title %>">
     </div>
-    
-    <h3 class="text-xs mt-1 tracking-tight truncate"><%= elem.title %></h3>
+        <h3 class="text-xs mt-1 tracking-tight truncate capitalize">User : <%= elem.user.username %></h3>
+
+    <h3 class="text-xs tracking-tight truncate">Title : <%= elem.title %></h3>
 </div>
 
+</a>
   <% })%>
 
  </div>
